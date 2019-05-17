@@ -6,8 +6,10 @@
  
  2- Run the `init-app-db.sql` script for create schemas.
  
- 3- Run command `npm install` on the app's root for install modules.
-  
- 4- Run the app with `npm run dev`.
+ 3- Configure the `.env` file with the `URL` of your database. 
  
- 5- The app run in localhost:3000.
+ 4- Run command `npm install` on the app's root for install modules.
+  
+ 5- Run the app with `npm run dev`.
+ 
+ 6- The app run in `localhost:3000`.
