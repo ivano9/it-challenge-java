@@ -10,6 +10,6 @@
  
  4- Run command `npm install` on the app's root for install modules.
   
- 5- Run the app with `npm run dev`.
+ 5- Run the app with the command `npm start` on the app's root.
  
  6- The app run in `localhost:3000`.
