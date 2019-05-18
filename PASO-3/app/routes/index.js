@@ -92,4 +92,22 @@ router.get('/persona/inscripcion-a-curso/:id', async (req, res) => {
    res.render('inscripcion-curso', { titulo1: 'Inscripción a Curso', alumno: alumno, cursos: rows } );
 })
 
+router.get('/persona/profesor/nuevo', async (req, res) => {
+   const client = require('../config/dbConnection')
+   const query = `SELECT identificador, nombre FROM curso`
+
+   const { rows } = await client.query(query)
+
+   res.render('personaProfForm', { cursos: rows })
+})
+
+router.get('/curso/info', async (req, res) => {
+   const client = require('../config/dbConnection')
+   const query = `SELECT identificador, nombre FROM curso`
+
+   const { rows } = await client.query(query)
+
+   res.render('cursoInfo', { cursos: rows, profesor: {}, alumnos: {}})
+})
+
 module.exports = router;

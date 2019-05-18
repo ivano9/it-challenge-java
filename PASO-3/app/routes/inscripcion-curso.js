@@ -18,11 +18,13 @@ router.post('/curso/inscripto', async (req, res) => {
 
    const query = `INSERT INTO inscripciones_curso(idalumno, idcurso) VALUES ($1, $2)`
 
-   for (const curso of list)
-      await client.query(query, [id, curso])
-   
-   res.redirect('/')
-
+   if (list) {
+      for (const curso of list)
+         await client.query(query, [id, curso])
+      res.redirect('/')
+   }
+   else
+      res.redirect(`/persona/inscripcion-a-curso/${ id }`)
 })
 
 module.exports = router

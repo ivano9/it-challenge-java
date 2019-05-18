@@ -13,7 +13,7 @@ drop table profesor;
 CREATE TABLE persona (
     identificador  serial PRIMARY KEY,
     tipodoc        char(5) NOT NULL,
-    documento 	    bigint NOT NULL,    
+    documento 	    bigint NOT NULL UNIQUE,    
     nombre       varchar(40) NOT NULL,
     apellido       varchar(40) NOT NULL,
     fechanac		date NOT NULL,

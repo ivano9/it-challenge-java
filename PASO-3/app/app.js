@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var personaFormRouter = require('./routes/personaForm');
 var inscripcionCursoRouter = require('./routes/inscripcion-curso')
+var personaProfFormRouter = require('./routes/personaProfForm')
+var cursoInfoRouter = require('./routes/cursoInfo')
 
 var app = express();
 
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/alumnos', personaFormRouter);
 app.use('/alumno', inscripcionCursoRouter)
+app.use('/profesor', personaProfFormRouter)
+app.use('/curso', cursoInfoRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

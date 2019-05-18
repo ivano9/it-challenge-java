@@ -6,7 +6,7 @@ const de = require('dotenv')
 de.config()
 
 const client = new Client({
-   connectionString: process.env.DATABASE_URI
+   connectionString: process.env.DATABASE_URL
 })
 
 client.connect()
