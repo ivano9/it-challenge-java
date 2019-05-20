@@ -1,3 +1,5 @@
+'use strict'
+
 let express = require('express');
 let router = express.Router();
 
@@ -15,10 +17,14 @@ router.post('/persona/operar', async (req, res, next) => {
       direccion,
       carrera
    } = req.body
+
+   if (!(tipodoc && documento && nombres && apellidos && fechanac && legajo && direccion && carrera))
+      return res.redirect('/persona/nuevo')
    
-   if (req.body.id === '') {
-      const iden = await client.query(
-         `INSERT INTO persona(tipodoc, documento, nombre, apellido, fechanac, direccion) VALUES ( $1, $2, $3, $4, $5, $6 ) RETURNING identificador;`,
+   if (req.body.id === '') { // Registrar un alumno
+      const idPersona = (await client.query(`
+         INSERT INTO persona(tipodoc, documento, nombre, apellido, fechanac, direccion) 
+         VALUES ( $1, $2, $3, $4, $5, $6 ) RETURNING identificador;`,
          [
             tipodoc,
             documento,
@@ -27,24 +33,29 @@ router.post('/persona/operar', async (req, res, next) => {
             fechanac,
             direccion
          ]
-      )
-      await client.query(
-         `INSERT INTO alumno(idpersona, legajo) VALUES ($1,$2);`,
+      )).rows[0].identificador
+      
+      const idAlumno = (await client.query(`
+         INSERT INTO alumno(idpersona, legajo) 
+         VALUES ($1,$2) RETURNING identificador;`,
          [
-            iden.rows[0].identificador,
+            idPersona,
             legajo
          ]
-      )
+      )).rows[0].identificador
+      
       await client.query(
          `INSERT INTO inscripciones_carrera VALUES ($1, $2)`,
          [
-            iden.rows[0].identificador,
+            idAlumno,
             carrera
          ]
       )
+
       res.redirect('/')
-   } else {
-      console.log(req.body)
+   
+   } else { // Editar datos de alumno
+
       const q1 = `
       UPDATE persona 
       SET tipodoc = $1, documento = $2, nombre = $3, apellido = $4, fechanac = $5, direccion = $6 

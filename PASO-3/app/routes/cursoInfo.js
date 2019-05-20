@@ -36,7 +36,8 @@ router.post('/info/consulta', async (req, res) => {
       if (cursoId == curso.identificador)
          nombreCurso = curso.nombre
    }
-   res.render('cursoInfo', { profesor: profesor, alumnos: alumnos, cursos: rows, cursoNom: nombreCurso})
+   res.render('cursoInfo', {
+      profesor: profesor, alumnos: alumnos, cursos: rows, cursoNom: nombreCurso, titulo: 'Alumnos inscriptos y docente correspondiente al curso.'})
 
 })
 

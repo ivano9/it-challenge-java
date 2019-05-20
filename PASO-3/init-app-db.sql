@@ -13,7 +13,7 @@ drop table profesor;
 CREATE TABLE persona (
     identificador  serial PRIMARY KEY,
     tipodoc        char(5) NOT NULL,
-    documento 	    bigint NOT NULL UNIQUE,    
+    documento 	    bigint NOT NULL UNIQUE,
     nombre       varchar(40) NOT NULL,
     apellido       varchar(40) NOT NULL,
     fechanac		date NOT NULL,
@@ -24,13 +24,14 @@ CREATE TABLE persona (
 CREATE TABLE alumno (
     identificador  serial PRIMARY KEY,
     idpersona	    integer REFERENCES persona (identificador) ON DELETE CASCADE UNIQUE,
-    legajo 	    integer NOT NULL
+    legajo 	    integer NOT NULL UNIQUE
 );
 
 CREATE TABLE profesor (
     identificador  serial PRIMARY KEY,
     idpersona	    integer REFERENCES persona (identificador) ON DELETE CASCADE UNIQUE,
     matricula     integer NOT NULL
+    
 );
 
 
@@ -50,7 +51,7 @@ CREATE TABLE curso (
     descripcion      varchar(250),
     cupomaximo 	smallint NOT NULL,
     anio			smallint NOT NULL,
-    idprofesor integer REFERENCES profesor (identificador) ON DELETE CASCADE
+    idprofesor integer REFERENCES profesor (identificador)
 );
 
 

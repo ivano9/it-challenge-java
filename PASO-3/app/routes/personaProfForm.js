@@ -15,7 +15,8 @@ router.post('/persona/operar', async (req, res) => {
       listCursos
    } = req.body
 
-   console.log(listCursos)
+   if (!(tipodoc && documento && nombres && apellidos && fechanac && matricula && direccion && listCursos))
+      return res.redirect('/persona/profesor/nuevo')
 
    const client = require('../config/dbConnection')
 
@@ -29,13 +30,9 @@ router.post('/persona/operar', async (req, res) => {
 
    const query3 = `UPDATE curso SET idprofesor = $1 WHERE identificador = $2`
 
-   if (listCursos) {
-      for (const curso of listCursos)
-         await client.query(query3, [idProf, curso])
-      res.redirect('/')
-   }
-   else
-      res.redirect('/persona/profesor/nuevo')
+   for (const curso of listCursos)
+      await client.query(query3, [idProf, curso])
+   res.redirect('/')
 })
 
 module.exports = router
