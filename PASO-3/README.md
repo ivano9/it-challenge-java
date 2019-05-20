@@ -1,6 +1,6 @@
  # NodeJS App.
 
- ### Summary to run app.
+ ## Summary to run app.
  
  1. Create a PostgreSQL DB with the name `dbuni` and start the PostgreSQL service.
  
@@ -15,6 +15,5 @@
  6. The app run in `localhost:3000`.
  
  ----
- ### Author
+ ## Author
  Authored by [Iván Ordóñez Giovanazzi](https://www.linkedin.com/in/ivanog/ "LinkedIn Profile")
- 
