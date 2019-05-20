@@ -14,6 +14,5 @@
  
  6. The app run in `localhost:3000`.
  
- ----
  ## Author
  Authored by [Iván Ordóñez Giovanazzi](https://www.linkedin.com/in/ivanog/ "LinkedIn Profile")
